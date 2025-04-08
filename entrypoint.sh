@@ -43,8 +43,9 @@ threads = ${FFMPEG_THREADS}
 nice = ${FFMPEG_NICE}
 
 [transcription]
-engine = "whisper-ctranslate2"
-model = "small"
+engine = "${PEERTUBE_TRANSCRIPTION_ENGINE}"
+enginePath = "${PEERTUBE_TRANSCRIPTION_ENGINEPATH}"
+model = "${PEERTUBE_TRANSCRIPTION_MODEL}"
 
 [registeredInstances]
 url = "${PEERTUBE_URL}"

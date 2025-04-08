@@ -5,16 +5,19 @@ LABEL org.opencontainers.image.description="Peertube Runner"
 LABEL org.opencontainers.image.licenses=GPL-3.0-or-later
 
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV FFMPEG_THREADS 0
-ENV FFMPEG_CONCURRENT_JOBS 2
-ENV FFMPEG_NICE 20
-ENV PEERTUBE_CONFIG_DIR = "/home/peertube/.config/peertube-runner-nodejs/default"
-ENV PEERTUBE_CONFIG "config.toml"
-ENV PEERTUBE_RUNNER_NAME ""
-ENV PEERTUBE_URL ""
-ENV PEERTUBE_RUNNER_TOKEN ""
-ENV PEERTUBE_RUNNER_DESCRIPTION "Peertube Runner"
+ENV DEBIAN_FRONTEND=noninteractive
+ENV FFMPEG_THREADS=0
+ENV FFMPEG_CONCURRENT_JOBS=2
+ENV FFMPEG_NICE=20
+ENV PEERTUBE_CONFIG_DIR="/home/peertube/.config/peertube-runner-nodejs/default"
+ENV PEERTUBE_CONFIG="config.toml"
+ENV PEERTUBE_RUNNER_NAME=""
+ENV PEERTUBE_URL=""
+ENV PEERTUBE_RUNNER_TOKEN=""
+ENV PEERTUBE_RUNNER_DESCRIPTION="Peertube Runner"
+ENV PEERTUBE_TRANSCRIPTION_ENGINE="whisper-ctranslate2"
+ENV PEERTUBE_TRANSCRIPTION_MODEL="small"
+ENV PEERTUBE_TRANSCRIPTION_ENGINEPATH="/home/peertube/.local/pipx/venvs/whisper-ctranslate2/bin/whisper-ctranslate2"
 
 WORKDIR /home/peertube/
 
