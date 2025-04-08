@@ -1,0 +1,32 @@
+FROM node:23-slim
+
+LABEL org.opencontainers.image.source=https://github.com/fediverse-games/peertube-runner-docker
+LABEL org.opencontainers.image.description="Peertube Runner"
+LABEL org.opencontainers.image.licenses=GPL-3.0-or-later
+
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV FFMPEG_THREADS 0
+ENV FFMPEG_CONCURRENT_JOBS 2
+ENV FFMPEG_NICE 20
+ENV PEERTUBE_CONFIG_DIR = "/home/peertube/.config/peertube-runner-nodejs/default"
+ENV PEERTUBE_CONFIG "config.toml"
+ENV PEERTUBE_RUNNER_NAME ""
+ENV PEERTUBE_URL ""
+ENV PEERTUBE_RUNNER_TOKEN ""
+ENV PEERTUBE_RUNNER_DESCRIPTION "Peertube Runner"
+
+WORKDIR /home/peertube/
+
+ENV HOME=/home/peertube
+
+COPY entrypoint.sh /
+
+RUN apt update \
+    && apt install -y pipx ffmpeg --no-install-recommends \
+    && apt clean && rm -rf /var/lib/apt/lists/* && pipx install whisper-ctranslate2 && pipx ensurepath && npm i @peertube/peertube-runner@0.1.0 && chmod +x /entrypoint.sh
+
+VOLUME [ "/home/peertube/.config/peertube-runner-nodejs/" ]
+
+
+ENTRYPOINT ["/entrypoint.sh"]
