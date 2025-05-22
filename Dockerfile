@@ -18,8 +18,7 @@ ENV PEERTUBE_RUNNER_DESCRIPTION="Peertube Runner"
 ENV PEERTUBE_TRANSCRIPTION_ENGINE="whisper-ctranslate2"
 ENV PEERTUBE_TRANSCRIPTION_MODEL="small"
 ENV PEERTUBE_TRANSCRIPTION_ENGINEPATH="/home/peertube/.local/pipx/venvs/whisper-ctranslate2/bin/whisper-ctranslate2"
-
-RUN useradd -u 999 peertube
+ENV PEERTUBE_RUNNER_ADDITIONAL_ARGS=""
 
 WORKDIR /home/peertube/
 
@@ -32,7 +31,5 @@ RUN apt update \
     && apt clean && rm -rf /var/lib/apt/lists/* && pipx install whisper-ctranslate2 && pipx ensurepath && npm i @peertube/peertube-runner@0.1.3 && chmod +x /entrypoint.sh
 
 VOLUME [ "/home/peertube/.config/peertube-runner-nodejs/" ]
-
-USER 999
 
 ENTRYPOINT ["/entrypoint.sh"]

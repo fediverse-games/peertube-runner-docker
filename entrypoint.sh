@@ -56,6 +56,8 @@ runnerDescription = "${PEERTUBE_RUNNER_DESCRIPTION}"
 EOF
     
 fi
+
+
 echo "Starting peertube runner now..."
 trap "echo 'Termination command received. Deregistering runner and terminating...'; npx peertube-runner unregister --id ${PEERTUBE_RUNNER_NAME} --runner-name ${PEERTUBE_RUNNER_NAME} --url ${PEERTUBE_URL}" SIGTERM
-npx peertube-runner server --id ${PEERTUBE_RUNNER_NAME} & sleep 2s; npx peertube-runner register --id ${PEERTUBE_RUNNER_NAME} --runner-name ${PEERTUBE_RUNNER_NAME} --url ${PEERTUBE_URL} --registration-token ${PEERTUBE_RUNNER_TOKEN} & wait
+npx peertube-runner server ${PEERTUBE_RUNNER_ADDITIONAL_ARGS} --id ${PEERTUBE_RUNNER_NAME} & sleep 2s; npx peertube-runner register --id ${PEERTUBE_RUNNER_NAME} --runner-name ${PEERTUBE_RUNNER_NAME} --url ${PEERTUBE_URL} --registration-token ${PEERTUBE_RUNNER_TOKEN} & wait
